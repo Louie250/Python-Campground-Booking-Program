@@ -1,0 +1,1 @@
+Format: Date - Name of Bookee - Nights Stayed - Price Per Night - Total Sale
