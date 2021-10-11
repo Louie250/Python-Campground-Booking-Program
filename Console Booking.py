@@ -7,7 +7,8 @@ while True:
         numberOfPeople = int(input("Enter number of people staying: "))
         nightsStaying = int(input("Enter number of nights staying: "))
         plot = backend_functions.choosePlot()
-        backend_functions.addBooking(name, numberOfPeople, plot, nightsStaying)
+        if plot != -1:
+            backend_functions.addBooking(name, numberOfPeople, plot, nightsStaying)
 
     elif choice == "rem":
         customerPlot = int(input("\nAsk customer for plot number that they stayed at: "))
