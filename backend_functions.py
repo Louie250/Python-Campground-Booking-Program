@@ -3,6 +3,7 @@ from random import randrange
 from datetime import date
 
 pricePerNight = 7
+numberOfPlots = 50
 date = date.today().strftime("%d/%m/%Y")
 
 def addSale(date, name, nights, pricePerNight, saleValue):
@@ -51,7 +52,7 @@ def checkPlot(plot):
             return False
 
 def choosePlot():
-    plot = randrange(2)
+    plot = randrange(numberOfPlots)
     tries = 0
     if os.stat("Bookings.txt").st_size == 0:
             return plot
@@ -61,12 +62,12 @@ def choosePlot():
                 index += 1
                 while ("Plot "+ str(plot)) in line:
                     tries += 1
-                    if tries == 2:
+                    if tries == numberOfPlots:
                         print("Error, there are no more bookings")
                         tries = 0
                         plot = -1
                         return plot
                     else:
-                        plot = randrange(2)
+                        plot = randrange(numberOfPlots)
                     
             return plot
