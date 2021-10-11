@@ -1,3 +1,4 @@
+import os
 from random import randrange
 from datetime import date
 
@@ -48,6 +49,24 @@ def checkPlot(plot):
         if ("Plot "+ str(plot)) not in line:
             print("Error, there is no booking at plot " + str(plot) + "\n")
             return False
+
 def choosePlot():
-    plot = randrange(99) + 1 # Change the value in brackets to the amount of plots that you have
-    return plot
+    plot = randrange(2)
+    tries = 0
+    if os.stat("Bookings.txt").st_size == 0:
+            return plot
+    with open("Bookings.txt","r") as f:
+            index = 0
+            for line in f:
+                index += 1
+                while ("Plot "+ str(plot)) in line:
+                    tries += 1
+                    if tries == 2:
+                        print("Error, there are no more bookings")
+                        tries = 0
+                        plot = -1
+                        return plot
+                    else:
+                        plot = randrange(2)
+                    
+            return plot
