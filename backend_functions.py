@@ -1,4 +1,3 @@
-import os
 from random import choice as r_choice
 from datetime import date
 
