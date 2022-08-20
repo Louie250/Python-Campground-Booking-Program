@@ -12,7 +12,7 @@ while True:
 
     elif choice == "rem":
         customerPlot = int(input("\nAsk customer for plot number that they stayed at: "))
-        if backend_functions.checkPlot(customerPlot) == True:
+        if backend_functions.checkPlot(customerPlot):
             backend_functions.remBooking(customerPlot)
     
     elif choice == "exit":
