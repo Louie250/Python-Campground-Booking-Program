@@ -2,19 +2,19 @@ import os
 from random import choice as r_choice
 from datetime import date
 
-pricePerNight = 7
-numberOfPlots = 50
+PRICE_PER_NIGHT = 7
+NUMBER_OF_PLOTS = 50
 
-def addSale(date_today, name, people, nights, pricePerNight, saleValue):
+def addSale(date_today, name, people, nights, saleValue):
     with open('Sales.txt', 'a') as salesF:
-        salesF.write(f"{date_today} - {name} - {people} - {nights} - {pricePerNight} - {saleValue}")
+        salesF.write(f"{date_today} - {name} - {people} - {nights} - {PRICE_PER_NIGHT} - {saleValue}")
 
 def addBooking(name, people, nights):
     plot = choosePlot()
     date_today = date.today().strftime("%d/%m/%Y")
-    cost = nights * people * pricePerNight
+    cost = nights * people * PRICE_PER_NIGHT
     insertBooking = f"['{name}', {people}, 'Plot {plot}', {nights}, '{date_today}', {cost}]\n"
-    addSale(date_today, name, people, nights, pricePerNight, cost)
+    addSale(date_today, name, people, nights, cost)
     with open('Bookings.txt', 'a') as bookings:
         bookings.write(insertBooking)
     
@@ -48,9 +48,8 @@ def choosePlot():
     except FileNotFoundError:
         bookings = []
 
-    if len(bookings) == numberOfPlots:
+    if len(bookings) == NUMBER_OF_PLOTS:
         print("Error, there are no more bookings available.")
         return -1
 
-    return r_choice([x for x in range(numberOfPlots) if x not in bookings])
-
+    return r_choice([x for x in range(NUMBER_OF_PLOTS) if x not in bookings])
