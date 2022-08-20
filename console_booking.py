@@ -1,7 +1,7 @@
 import backend_functions
 
 while True:
-    choice = input("Do you want to add or remove a booking (add/rem): ")
+    choice = input("Do you want to add or remove a booking (add/rem/exit): ")
     if choice == "add":
         name = input("\nEnter the customer's name: ")
         numberOfPeople = int(input("Enter number of people staying: "))
