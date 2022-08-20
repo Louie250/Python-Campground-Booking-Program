@@ -70,4 +70,4 @@ def choosePlot():
                 else:
                     plot = randrange(numberOfPlots)
                 
-        return plot
+    return plot
