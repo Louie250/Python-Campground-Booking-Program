@@ -4,22 +4,13 @@ from datetime import date
 
 pricePerNight = 7
 numberOfPlots = 50
-date_today = date.today().strftime("%d/%m/%Y")
 
-def addSale(date, name, nights, pricePerNight, saleValue):
+def addSale(date_today, name, nights, pricePerNight, saleValue):
     with open('Sales.txt', 'a') as salesF:
-        salesF.write(str(date))
-        salesF.write(" - ")
-        salesF.write(str(name))
-        salesF.write(" - ")
-        salesF.write(str(nights))
-        salesF.write(" - ")
-        salesF.write(str(pricePerNight))
-        salesF.write(" - ")
-        salesF.write(str(saleValue))
-        salesF.write("\n")
+        salesF.write(f"{date} - {name} - {nights} - {pricePerNight} - {saleValue}")
 
 def addBooking(name, people, plot, nights):
+    date_today = date.today().strftime("%d/%m/%Y")
     cost = nights * pricePerNight
     insertBooking = f"['{name}', {people}, 'Plot {plot}', {nights}, '{date_today}', '£{cost}']\n"
     addSale(date_today, name, nights, pricePerNight, cost)
