@@ -4,7 +4,7 @@ from datetime import date
 
 pricePerNight = 7
 numberOfPlots = 50
-date = date.today().strftime("%d/%m/%Y")
+date_today = date.today().strftime("%d/%m/%Y")
 
 def addSale(date, name, nights, pricePerNight, saleValue):
     with open('Sales.txt', 'a') as salesF:
@@ -21,11 +21,10 @@ def addSale(date, name, nights, pricePerNight, saleValue):
 
 def addBooking(name, people, plot, nights):
     cost = nights * pricePerNight
-    insertBooking = [name,people,"Plot "+ str(plot),nights, date, "£"+str(cost)]
-    addSale(date, name, nights, pricePerNight, cost)
+    insertBooking = f"['{name}', {people}, 'Plot {plot}', {nights}, '{date_today}', '£{cost}']\n"
+    addSale(date_today, name, nights, pricePerNight, cost)
     with open('Bookings.txt', 'a') as bookings:
-        bookings.write(str(insertBooking))
-        bookings.write('\n')
+        bookings.write(insertBooking)
     
     print("Details: ",insertBooking, "\n")
 
@@ -52,9 +51,12 @@ def checkPlot(plot):
             return False
 
 def choosePlot():
-    with open("Bookings.txt") as f:
-        bookings = [l.strip('\n') for l in f.readlines()]
-    
+    try:
+        with open("Bookings.txt") as f:
+            bookings = [l.strip('\n') for l in f.readlines()]
+    except FileNotFoundError:
+        bookings = []
+
     if len(bookings) == numberOfPlots:
         print("Error, there are no more bookings available.")
         return -1
