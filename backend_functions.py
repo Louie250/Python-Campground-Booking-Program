@@ -30,16 +30,13 @@ def remBooking(plot):
         print("Successfully removed listing\n")
 
 def checkPlot(plot):
-    with open("Bookings.txt","r") as f:
-        index = 0
-        for line in f:
-            index += 1
-            if ("Plot "+ str(plot)) in line:
-                print(line)
-                return True
-        if ("Plot "+ str(plot)) not in line:
-            print("Error, there is no booking at plot " + str(plot) + "\n")
-            return False
+    with open("Bookings.txt") as f:
+        # the ' is important because otherwise searching for "Plot 1" will return True if "Plot 10" is booked
+        plot_is_booked = f"Plot {plot}'" in str([x for x in f.readlines()])
+        if not plot_is_booked:
+            print(f"Error, there is no booking at plot {plot}\n")
+        return plot_is_booked
+            
 
 def choosePlot():
     try:
