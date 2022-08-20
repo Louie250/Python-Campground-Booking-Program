@@ -55,19 +55,19 @@ def choosePlot():
     plot = randrange(numberOfPlots)
     tries = 0
     if os.stat("Bookings.txt").st_size == 0:
-            return plot
+        return plot
     with open("Bookings.txt","r") as f:
-            index = 0
-            for line in f:
-                index += 1
-                while ("Plot "+ str(plot)) in line:
-                    tries += 1
-                    if tries == numberOfPlots:
-                        print("Error, there are no more bookings")
-                        tries = 0
-                        plot = -1
-                        return plot
-                    else:
-                        plot = randrange(numberOfPlots)
-                    
-            return plot
+        index = 0
+        for line in f:
+            index += 1
+            while ("Plot "+ str(plot)) in line:
+                tries += 1
+                if tries == numberOfPlots:
+                    print("Error, there are no more bookings")
+                    tries = 0
+                    plot = -1
+                    return plot
+                else:
+                    plot = randrange(numberOfPlots)
+                
+        return plot
