@@ -9,7 +9,8 @@ def addSale(date_today, name, people, nights, pricePerNight, saleValue):
     with open('Sales.txt', 'a') as salesF:
         salesF.write(f"{date_today} - {name} - {people} - {nights} - {pricePerNight} - {saleValue}")
 
-def addBooking(name, people, plot, nights):
+def addBooking(name, people, nights):
+    plot = choosePlot()
     date_today = date.today().strftime("%d/%m/%Y")
     cost = nights * people * pricePerNight
     insertBooking = f"['{name}', {people}, 'Plot {plot}', {nights}, '{date_today}', {cost}]\n"
