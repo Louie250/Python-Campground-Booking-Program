@@ -1,5 +1,5 @@
 import os
-from random import randrange
+from random import choice as r_choice
 from datetime import date
 
 pricePerNight = 7
@@ -52,22 +52,12 @@ def checkPlot(plot):
             return False
 
 def choosePlot():
-    plot = randrange(numberOfPlots)
-    tries = 0
-    if os.stat("Bookings.txt").st_size == 0:
-        return plot
-    with open("Bookings.txt","r") as f:
-        index = 0
-        for line in f:
-            index += 1
-            while ("Plot "+ str(plot)) in line:
-                tries += 1
-                if tries == numberOfPlots:
-                    print("Error, there are no more bookings")
-                    tries = 0
-                    plot = -1
-                    return plot
-                else:
-                    plot = randrange(numberOfPlots)
-                
-    return plot
+    with open("Bookings.txt") as f:
+        bookings = [l.strip('\n') for l in f.readlines()]
+    
+    if len(bookings) == numberOfPlots:
+        print("Error, there are no more bookings available.")
+        return -1
+
+    return r_choice([x for x in range(numberOfPlots) if x not in bookings])
+
