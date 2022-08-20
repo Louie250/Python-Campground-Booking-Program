@@ -11,7 +11,7 @@ def addSale(date_today, name, people, nights, pricePerNight, saleValue):
 
 def addBooking(name, people, plot, nights):
     date_today = date.today().strftime("%d/%m/%Y")
-    cost = nights * pricePerNight
+    cost = nights * people * pricePerNight
     insertBooking = f"['{name}', {people}, 'Plot {plot}', {nights}, '{date_today}', '£{cost}']\n"
     addSale(date_today, name, people, nights, pricePerNight, cost)
     with open('Bookings.txt', 'a') as bookings:
