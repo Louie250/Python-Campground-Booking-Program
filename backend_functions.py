@@ -7,7 +7,7 @@ numberOfPlots = 50
 
 def addSale(date_today, name, people, nights, pricePerNight, saleValue):
     with open('Sales.txt', 'a') as salesF:
-        salesF.write(f"{date} - {name} - {people} - {nights} - {pricePerNight} - {saleValue}")
+        salesF.write(f"{date_today} - {name} - {people} - {nights} - {pricePerNight} - {saleValue}")
 
 def addBooking(name, people, plot, nights):
     date_today = date.today().strftime("%d/%m/%Y")
