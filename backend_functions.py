@@ -20,14 +20,16 @@ def addBooking(name, people, plot, nights):
     print("Details: ",insertBooking, "\n")
 
 def remBooking(plot):
-    with open("Bookings.txt","r+") as f:
-        new_f = f.readlines()
-        f.seek(0)
-        if ("Plot "+ str(plot)) in new_f:
-            if plot not in line:
+    with open("Bookings.txt") as f:
+        lines = f.readlines()
+    
+    with open("Bookings.txt", 'w') as f:
+        for line in lines:
+            if f"Plot {plot}'" in line:
+                print("Successfully removed listing\n")
+            else:
                 f.write(line)
-        f.truncate()
-        print("Successfully removed listing\n")
+        
 
 def checkPlot(plot):
     with open("Bookings.txt") as f:
